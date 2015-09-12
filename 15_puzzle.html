@@ -1,0 +1,803 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Tile Puzzle Game</title>
+
+<style type = "text/css">
+
+	h1{
+		text-align: center; 
+		font-family: "Trajan Pro", "Trajan Pro 3"; 
+	}
+	
+	table{
+		margin: auto;
+		text-align: center;  
+		border: solid 1px #000;
+	}
+	
+	td {
+		border: solid 1px #000;
+		width: 80px; 
+		height: 80px;
+		font-family: "Trajan Pro", "Trajan Pro 3"; 
+		font-size: 40px;
+	}
+	
+	div.test2{
+	//	border: solid 2px #000; 
+		margin: auto; 
+
+	}
+	
+	.button{
+		margin: auto;
+		text-align: center;
+	}
+	
+	.instructions, .status{
+		margin: auto; 
+		text-align:center; 
+		height: 70px; 
+		font-family: "Trajan Pro", "Trajan Pro 3"; 
+		font-size: 25px;
+	}
+	
+	.saved {
+		border: solid 1px #000;
+		font-family: "Trajan Pro", "Trajan Pro 3"; 
+		font-size: 6px; 
+		opacity: 1; 
+		margin: 0;  
+		left: 100px; 
+		top: -280px;
+		position: relative; 
+	}
+	
+	.last_saved{
+		opacity: 0; 
+		margin: 0;  
+		left: 100px; 
+		top: -280px;
+		position: relative;
+	}
+	
+	.saved td{
+		border: solid 1px #000;
+		width: 40px; 
+		height: 40px;
+		font-family: "Trajan Pro", "Trajan Pro 3"; 
+		font-size: 12px;
+	}
+	
+	th {
+		text-align: center; 
+		border: solid 1px #000; 
+		width: 100%; 
+		font-size: 16px; 
+	}
+</style>
+
+<script type = "text/javascript">
+<!--
+var obj = {y: 5, x: 20}
+var tile = new Array(16); 
+var original = new Array(15); 
+var array_index = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen"]; 
+
+function add(obj){
+	obj.y++; 
+}
+
+function fill_array(){
+	for(var i = 0; i < 16; i++)
+	{
+		var same = false; 
+		while(!same){
+			var num = Math.floor((Math.random()*16) + 1);
+			var j = i - 1; 
+			same = check(j, num); 
+ 
+		}
+		tile[i] = num; 
+	}
+}
+
+//This function ensures that there are no repeating numbers in the table. 
+//Initially, I tried using a recursive function, but it didn't work properly. Eventually, I figured the iterative version is simpler and therefore more effective
+function check(pointer, n){
+	for(var i = pointer; i>= 0; i--){
+		if(n == tile[i]){
+			return false;  
+		}
+	}
+	return true;
+
+}
+
+function blank_slot(){
+	for(var i = 0; i < 16; i++){
+		if(tile[i] == 16){
+			tile[i] = null; 
+			return; 
+		}
+	}
+}
+
+function assign(){
+	fill_array(); 
+	blank_slot();
+	copy();  
+	for(var i = 0; i < 16; i++){
+		document.getElementById(array_index[i]).innerHTML = tile[i]; 
+	}
+}
+
+function display(){
+	for(var i = 0; i < 16; i++){
+		document.getElementById(array_index[i]).innerHTML = tile[i]; 
+	}
+}
+
+function copy(){
+	for(var i = 0; i < 16; i++){
+		original[i] = tile[i]; 
+	}
+}
+
+function renew(){
+	for(var i = 0; i < 16; i++){
+		tile[i] = original[i]; 
+	}
+	display(); 
+}
+
+//working factorial function just to test something; it proves that recursive functions work in javascript  
+function factorial(n){
+	if(n == 1){
+		return 1; 
+	}
+	else{
+		return n * factorial(n - 1); 
+	}
+}
+
+function move(tobeMoved){
+//	alert(document.getElementById(tobeMoved).innerHTML); 
+var temp; 
+	switch(tobeMoved){
+		case "one":
+			if(tile[1] == null){
+				temp = tile[0]; 
+				tile[0] = null; 
+				tile[1] = temp; 
+				display(); 
+				order();;
+			}
+			if(tile[4] == null){
+				temp = tile[0]; 
+				tile[0] = null; 
+				tile[4] = temp; 
+				display(); 
+				order();;
+			}
+			break; 
+		case "two":
+			if(tile[0] == null){
+				temp = tile[1]; 
+				tile[1] = null; 
+				tile[0] = temp; 
+				display(); 
+				order();;
+			}
+			if(tile[5] == null){
+				temp = tile[1]; 
+				tile[1] = null; 
+				tile[5] = temp; 
+				display(); 
+				order();;
+			}
+			if(tile[2] == null){
+				temp = tile[1]; 
+				tile[1] = null; 
+				tile[2] = temp; 
+				display(); 
+				order();;
+			}
+			break;
+		case "three":
+			if(tile[1] == null){
+				temp = tile[2]; 
+				tile[2] = null; 
+				tile[1] = temp; 
+				display(); 
+				order();;
+			}
+			if(tile[6] == null){
+				temp = tile[2]; 
+				tile[2] = null; 
+				tile[6] = temp; 
+				display(); 
+				order();;
+			}
+			if(tile[3] == null){
+				temp = tile[2]; 
+				tile[2] = null; 
+				tile[3] = temp; 
+				display(); 
+				order();;
+			}
+			break;
+		case "four":
+			if(tile[2] == null){
+				temp = tile[3]; 
+				tile[3] = null; 
+				tile[2] = temp; 
+				display(); 
+				order();;
+			}
+			if(tile[7] == null){
+				temp = tile[3]; 
+				tile[3] = null; 
+				tile[7] = temp; 
+				display(); 
+				order();;
+			}
+			break;
+		case "five":
+			if(tile[0] == null){
+				temp = tile[4]; 
+				tile[4] = null; 
+				tile[0] = temp; 
+				display(); 
+				order();;
+			}
+			if(tile[5] == null){
+				temp = tile[4]; 
+				tile[4] = null; 
+				tile[5] = temp; 
+				display(); 
+				order();;
+			}
+			if(tile[8] == null){
+				temp = tile[4]; 
+				tile[4] = null; 
+				tile[8] = temp; 
+				display(); 
+				order();
+			}
+			break;
+		case "six":
+			if(tile[1] == null){
+				temp = tile[5]; 
+				tile[5] = null; 
+				tile[1] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[4] == null){
+				temp = tile[5]; 
+				tile[5] = null; 
+				tile[4] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[9] == null){
+				temp = tile[5]; 
+				tile[5] = null; 
+				tile[9] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[6] == null){
+				temp = tile[5]; 
+				tile[5] = null; 
+				tile[6] = temp; 
+				display(); 
+				order();
+			}
+			break;
+		case "seven":
+			if(tile[2] == null){
+				temp = tile[6]; 
+				tile[6] = null; 
+				tile[2] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[5] == null){
+				temp = tile[6]; 
+				tile[6] = null; 
+				tile[5] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[10] == null){
+				temp = tile[6]; 
+				tile[6] = null; 
+				tile[10] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[7] == null){
+				temp = tile[6]; 
+				tile[6] = null; 
+				tile[7] = temp; 
+				display(); 
+				order();
+			}
+			break;
+		case "eight":
+			if(tile[6] == null){
+				temp = tile[7]; 
+				tile[7] = null; 
+				tile[6] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[3] == null){
+				temp = tile[7]; 
+				tile[7] = null; 
+				tile[3] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[11] == null){
+				temp = tile[7]; 
+				tile[7] = null; 
+				tile[11] = temp; 
+				display(); 
+				order();
+			}
+			break;
+		case "nine":
+			if(tile[4] == null){
+				temp = tile[8]; 
+				tile[8] = null; 
+				tile[4] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[9] == null){
+				temp = tile[8]; 
+				tile[8] = null; 
+				tile[9] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[12] == null){
+				temp = tile[8]; 
+				tile[8] = null; 
+				tile[12] = temp; 
+				display(); 
+				order();
+			}
+			break;
+		case "ten":
+			if(tile[8] == null){
+				temp = tile[9]; 
+				tile[9] = null; 
+				tile[8] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[5] == null){
+				temp = tile[9]; 
+				tile[9] = null; 
+				tile[5] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[13] == null){
+				temp = tile[9]; 
+				tile[9] = null; 
+				tile[13] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[10] == null){
+				temp = tile[9]; 
+				tile[9] = null; 
+				tile[10] = temp; 
+				display(); 
+				order();
+			}
+			break;
+		case "eleven":
+			if(tile[9] == null){
+				temp = tile[10]; 
+				tile[10] = null; 
+				tile[9] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[6] == null){
+				temp = tile[10]; 
+				tile[10] = null; 
+				tile[6] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[11] == null){
+				temp = tile[10]; 
+				tile[10] = null; 
+				tile[11] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[14] == null){
+				temp = tile[10]; 
+				tile[10] = null; 
+				tile[14] = temp; 
+				display(); 
+				order();
+			}
+			break;
+		case "twelve":
+			if(tile[7] == null){
+				temp = tile[11]; 
+				tile[11] = null; 
+				tile[7] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[10] == null){
+				temp = tile[11]; 
+				tile[11] = null; 
+				tile[10] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[15] == null){
+				temp = tile[11]; 
+				tile[11] = null; 
+				tile[15] = temp; 
+				display(); 
+				order();
+			}
+			break;
+		case "thirteen":
+			if(tile[8] == null){
+				temp = tile[12]; 
+				tile[12] = null; 
+				tile[8] = temp; 
+				display(); 
+				order();
+				
+			}
+			if(tile[13] == null){
+				temp = tile[12]; 
+				tile[12] = null; 
+				tile[13] = temp; 
+				display(); 
+				order();
+			}
+			break;
+		case "fourteen":
+			if(tile[12] == null){
+				temp = tile[13]; 
+				tile[13] = null; 
+				tile[12] = temp; 
+				display();
+				order(); 
+			}
+			if(tile[9] == null){
+				temp = tile[13]; 
+				tile[13] = null; 
+				tile[9] = temp; 
+				display();
+				order(); 
+			}
+			if(tile[14] == null){
+				temp = tile[13]; 
+				tile[13] = null; 
+				tile[14] = temp; 
+				display(); 
+				order();
+			}
+			break;
+		case "fifteen":
+			if(tile[13] == null){
+				temp = tile[14]; 
+				tile[14] = null; 
+				tile[13] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[10] == null){
+				temp = tile[14]; 
+				tile[14] = null; 
+				tile[10] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[15] == null){
+				temp = tile[14]; 
+				tile[14] = null; 
+				tile[15] = temp; 
+				display(); 
+				order();
+			}
+			break;
+		case "sixteen":
+			if(tile[14] == null){
+				temp = tile[15]; 
+				tile[15] = null; 
+				tile[14] = temp; 
+				display(); 
+				order();
+			}
+			if(tile[11] == null){
+				temp = tile[15]; 
+				tile[15] = null; 
+				tile[11] = temp; 
+				display(); 
+				order();
+			}
+			break;
+		default: 
+			alert("invalid input"); 
+			break; 
+	}
+}
+
+function order(){
+	for(var i = 0; i < 15; i++){
+		if(tile[i] != i+1){
+			return; 
+		}
+	}
+	document.getElementById("status").innerHTML = "The tiles are in order. You've done it!"; 	
+}
+
+function save(){
+	var temp = ""; 
+	for(var i = 0; i < tile.length; i++){
+		if(tile[i] == null){
+			temp = temp + "n=null, ";
+		}
+		else
+			temp = temp + "n=" + tile[i] + ", "; 
+	}
+	var d = new Date(); 
+	d.setTime(d.getTime() + (60 * 24 * 60 * 60 * 1000)); 
+	var expires = "expires=" + d.toGMTString(); 
+	temp = temp + " " + expires; 
+//	document.getElementById("test").innerHTML = temp; 
+	document.cookie = temp;
+	last_saved(); 
+}
+
+//this function loads numbers from the previously saved game onto the small preview section when the save button is clicked 
+function last_saved(){ 
+	for(var i = 0; i <tile.length; i++){
+		var num_id = "t"; 
+		var num = i + 1; 
+		num_id += num.toString(); 
+		document.getElementById(num_id).innerHTML = tile[i]; 
+	}
+	document.getElementById("last_saved").className = "saved"; 
+	
+}
+
+
+//Whenever you are creating a new tag, you want to use appendChild, so it appears on the webpage.
+//This attempt at building the last_saved function does not work at all.  
+/*
+function last_saved(){
+	var box = document.createElement("TABLE"); 
+	box.id = "saved"; 
+	box.className = "saved";
+	var i = 0; 
+	var row_id;
+	var temp;   
+	var text; 
+	while(i < tile.length){
+		temp = document.createElement("p"); 
+		document.getElementById("test2").appendChild(temp); 
+		text = document.createTextNode("Doing something" + i.toString() + " - " + tile.length); 
+		temp.appendChild(text); 	
+		if((i)%4 == 0){
+			row = document.createElement("TR"); 
+			row_id = "row" + i.toString(); //needs to be a string
+			row.id = row_id; 
+			box.appendChild(document.getElementById(row.id)); 
+		}
+		var col = document.createElement("TD"); 
+		col.innerHTML = tile[i]; 
+		document.getElementById(row_id).appendChild(col); 
+		i++; 
+	}
+	
+	document.getElementById("test2").appendChild(box); 
+//	document.getElementById("test2").innerHTML = "It is doing something."; 
+}
+*/
+
+//this function loads numbers from a previously saved game on to the board 
+function load(){
+	var ca = document.cookie.split(','); 
+	var variable = "n="; 
+	var count = 0; 
+	var itm; 
+	var temp2 = ""; 
+	/*
+	for(var i = 0; i < 16; i++){
+		tile[i] = ""; 
+	}
+	*/
+	for(var i = 0; i < ca.length - 1; i++){
+		itm = ca[i]; 
+		while(itm.charAt(0) == ' '){
+			itm = itm.substring(1); 
+		}
+		//using this loop was necessary since the Javascript cookie was storing extraneous information 
+		//the code is saying to find characters "n=" inside each index of array ca, then record all characters following "n="
+		for(var j = 0; j < itm.length; j++){
+			if(itm.indexOf(variable) == j){
+				var temp = itm.substring(j + variable.length); 
+				if(temp == "null"){
+					temp = null; 
+				}
+				tile[count] = temp; 
+				temp2 = temp2 + temp + ", "; 	
+				count++;
+			}
+		}
+
+	}
+//	document.getElementById("test2").innerHTML = temp2;
+//	document.getElementById("test3").innerHTML = tile[15]; 
+	for(var i = 0; i < 16; i++){
+		document.getElementById(array_index[i]).innerHTML = tile[i]; 
+	}
+}
+
+function delete_cookie(){
+	var d = new Date(0); 
+	var expires = "expires=" + d.toGMTString(); 
+	d.setTime(d.getTime() - 60 * 24* 60 * 60 * 1000); 
+	document.cookie = "n=, n=, n=, n=, n=, n=, n=, n=, n=, n=, n=, n=, n=, n=, n=, n=, " + expires; 
+	
+	
+	for(var i = 0; i <tile.length; i++){
+		var num_id = "t"; 
+		var num = i + 1; 
+		num_id += num.toString(); 
+		document.getElementById(num_id).innerHTML = ""; 
+	}
+}
+
+//this function loads numbers from a previously saved game onto the small preview section 
+function load_last_saved(){
+	var ca = document.cookie.split(','); 
+	var variable = "n="; 
+	var count = 0; //count will correspond to the index of tile array 
+	var itm; 
+	for(var i = 0; i < ca.length - 1; i++){
+		itm = ca[i]; 
+		while(itm.charAt(0) == ' '){
+			itm = itm.substring(1); 
+		}
+		//using this loop was necessary since the Javascript cookie was storing extraneous information 
+		//because of the behavior of the cookie, the following had to be written to find any index carrying the string "n="
+		//the code is saying to find characters "n=" inside each index of array ca, then record all characters following "n="
+		for(var j = 0; j < itm.length; j++){
+			if(itm.indexOf(variable) == j){
+				var temp = itm.substring(j + variable.length); 
+				if(temp == "null"){
+					temp = null; 
+				}
+				//code for filling in the smal preview section 
+				var num_id = "t"; 
+				var num = count + 1; 
+				num_id += num.toString(); 
+				document.getElementById(num_id).innerHTML = temp; 	
+				count++;
+			}
+		}
+
+	}
+}
+
+//the Javascript cookie was acting weird and I had to use the following function to figure out what was going on. Upon examination, I realize that the cookie was storing extraneous information. Inside the cookie existed the information that I want the program to work with. Thus, I wrote the load function to record on that part of the information. 
+/*
+function examine(){
+	var ca = document.cookie.split(',');
+	var itm; 
+	var c = "n="; 
+	var temp = ""; 
+	for(var i = 0; i < ca.length; i++){
+		itm = ca[i]; 
+		while(itm.charAt(0) == ' '){
+			itm = itm.substring(1); 
+		}
+		temp += "ca[" + i + "] = " + itm + ","; 
+	}
+	
+	document.getElementById("test2").innerHTML = temp; 
+}*/
+
+//add(obj); 
+//alert(obj.y); 
+-->
+</script>
+
+</head>
+
+<body onload = "load_last_saved()">
+<h1>Tile Puzzle</h1>
+<div class = "instructions">Start a new game by clicking the button "Start New Game." <br /> Click on the individual tiles to place the numbers in order.</div>
+<div id = "status" class = "status"></div>
+<table>
+	<tr>
+    	<td id = "one" onclick = "move('one')"></td>
+        <td id = "two" onclick = "move('two')"></td>
+        <td id = "three" onclick = "move('three')"></td>
+        <td id = "four" onclick = "move('four')"></td>
+    </tr>
+    <tr>
+    	<td id = "five" onclick = "move('five')"></td>
+        <td id = "six" onclick = "move('six')"></td>
+        <td id = "seven" onclick = "move('seven')"></td>
+        <td id = "eight" onclick = "move('eight')"></td>
+    </tr>
+    <tr>
+    	<td id = "nine" onclick = "move('nine')"></td>
+        <td id = "ten" onclick = "move('ten')"></td>
+        <td id = "eleven" onclick = "move('eleven')"></td>
+        <td id = "twelve" onclick = "move('twelve')"></td>
+    </tr>
+    <tr>
+    	<td id = "thirteen" onclick = "move('thirteen')"></td>
+        <td id = "fourteen" onclick = "move('fourteen')"></td>
+        <td id = "fifteen" onclick = "move('fifteen')"></td>
+        <td id = "sixteen" onclick = "move('sixteen')"></td>
+    </tr>
+</table>
+<div class = "button">
+<input type = "button" value = "Start Over" onclick = "renew()" />
+<input type = "button" value = "Start New Game" onclick = "assign()" />
+<input type = "button" value = "Save Game" onclick = "save()" />
+<input type = "button" value = "Load Saved Game" onclick = "load()" /> 
+<input type = "button" value = "Delete Saved Game" onclick = "delete_cookie()" />
+<!--<input type = "button" value = "Examine" onclick = "examine()" /> -->
+</div>
+<div>
+<table  id = "saved" class = "saved">
+	<thead>
+    	<th colspan = "4">Last Saved Game</th>
+    </thead>
+	<tr>
+    	<td id = "t1"></td>
+        <td id = "t2"></td>
+        <td id = "t3"></td>
+        <td id = "t4"></td>
+    </tr>
+    <tr>
+    	<td id = "t5"></td>
+        <td id = "t6"></td>
+        <td id = "t7"></td>
+        <td id = "t8"></td>
+    </tr>
+    <tr>
+    	<td id = "t9"></td>
+        <td id = "t10"></td>
+        <td id = "t11"></td>
+        <td id = "t12"></td>
+    </tr>
+    <tr>
+    	<td id = "t13"></td>
+        <td id = "t14"></td>
+        <td id = "t15"></td>
+        <td id = "t16"></td>
+    </tr>
+</table>
+</div>
+
+<div id = "test"></div>
+<div id = "test2" class = "test2"></div>
+
+</body>
+</html>
