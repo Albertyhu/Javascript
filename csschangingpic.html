@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Changing Pic</title>
+<style type = "text/css">
+.main {
+		max-width: 450px; 
+		max-height: 600px;
+		margin:auto;
+		border: solid 1px #000;  
+		overflow: hidden;
+	}
+	
+.flower{
+	width: 450px; 
+	height: 600px; 
+	background-size: cover; 
+	background-image: url("pic/flower.jpg"); 
+	-webkit-transition: all .5s linear;
+	-o-transition: all .5s linear;
+	-ms-transition: all .5s linear;
+	-moz-transition: all .5s linear;
+	transition: all .5s linear;
+	
+}
+
+.hills{
+	width: 450px; 
+	height: 600px; 
+	background-size: cover;
+	background-image: url("pic/hills.jpg"); 
+	-webkit-transition: all .5s linear;
+	-o-transition: all .5s linear;
+	-ms-transition: all .5s linear;
+	-moz-transition: all .5s linear;
+	transition: all .5s linear;
+
+}
+
+.names{
+	width: 450px; 
+	height: 600px; 
+	background-size: cover;
+	background-image: url("pic/names.jpg"); 
+	-webkit-transition: all .5s linear;
+	-o-transition: all .5s linear;
+	-ms-transition: all .5s linear;
+	-moz-transition: all .5s linear;
+	transition: all .5s linear;
+
+}
+
+.ocean{
+	width: 450px; 
+	height: 600px; 
+	background-size: cover;
+	background-image: url("pic/ocean.jpg"); 
+	-webkit-transition: all .5s linear;
+	-o-transition: all .5s linear;
+	-ms-transition: all .5s linear;
+	-moz-transition: all .5s linear;
+	transition: all .5s linear;
+
+}
+	
+</style> 
+
+<script type = "text/javascript">
+var interval = null; 
+var count = 1; 
+var array = ["flower", "hills", "names", "ocean"];
+function change(){
+	var x = document.getElementById("tobechanged"); 
+	interval = setInterval("run()", 2000); 
+	
+}
+
+function run(){
+	var x = document.getElementById("tobechanged"); 
+	x.className = array[count]; 
+	count++; 
+	if(count > 3){
+		count = 0; 
+	}
+}
+
+</script>
+
+</head>
+
+<body onload = "change()">
+<div class = "main" id = "main">
+	<div class = "flower" id = "tobechanged">
+    
+	</div>
+</div>
+</body>
+</html>

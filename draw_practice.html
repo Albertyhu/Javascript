@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Draw Practice</title>
+
+<style type = "text/css">
+	#canvas{
+		border-collapse: collapse; 
+		border: solid 1px #999999; 
+		
+		}
+	td{
+		width: 4px; 
+		height: 4px;
+	}
+	.key{
+		border-bottom: 1px solid #999999; 
+	}
+	
+</style>
+
+<script type = "text/javascript">
+
+function createCanvas(){
+	var x = 100; 
+	for(var i = 0; i < x; i++){
+		var newRow = document.createElement("tr"); 
+		for(var j = 0; j < x; j++){
+			var box = document.createElement("td"); 
+			box.id = "single"; 
+			newRow.appendChild(box); 
+			box.onmousemove = draw; 
+		}
+		document.getElementById("main").appendChild(newRow); 
+	}
+}
+
+function draw(e){
+	if(!e){
+		var e = window.event; 
+	}
+	if(e.shiftKey){
+		this.style.backgroundColor = "red"; 
+	}
+	if(e.ctrlKey){
+		this.style.backgroundColor = "blue";
+	}
+	if(e.altKey){
+		this.style.backgroundColor = "white"; 
+	}
+}
+
+function erase_canvas(){
+	var oldcanvas = document.getElementById("main"); 
+//create a new canvas 
+	var newCan = document.createElement("tbody"); 
+	var x = 100;
+	var newHead = document.createElement("th");
+	newHead.colSpan = "100";   
+	newHead.id = "key"; 
+	newHead.innerHTML = "Hold <tt>\"shift\"</tt> to draw red. Hold <tt>\"control\"</tt> to draw blue. Hold <tt>\"alt\"</tt> to erase."; 
+	newCan.appendChild(newHead); 
+	for(var i = 0; i < x; i++){
+		var newRow = document.createElement("tr"); 
+		for(var j = 0; j < x; j++){
+			var newCol = document.createElement("td"); 
+			newRow.appendChild(newCol); 
+		 	newCol.onmousemove = draw; //give this feature to each td element
+		}
+		newCan.appendChild(newRow); 
+	}
+	
+//replace the old one
+	var parent	= document.getElementById("canvas");
+	parent.replaceChild(newCan, oldcanvas); 
+	newCan.id = "main"; 
+}
+
+</script>
+
+</head>
+
+<body onload = "createCanvas()">
+<table id = "canvas" class = "canvas">
+<tbody id = "main">
+<tr>
+	<th colspan = "100" id = "key">Hold <tt>"shift"</tt> to draw red. Hold <tt>"control"</tt> to draw blue. Hold <tt>alt</tt> to erase.</th>
+</tr>
+</tbody>
+</table>
+<input type = "button" value = "Clear Canvas" onclick = "erase_canvas()" /> 
+
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Java Practice</title>
+
+<script type = "text/javascript">
+<!--
+/*
+	//earlier code 
+	document.writeln("<h1>Hello, World!</h1>"); 
+	var today; 
+	var name; 
+	var hour; 
+	var minute; 
+	var m = "am"; 
+	name = window.prompt("Welcome to Javascript programming\. Please enter your name\."); 
+	today = new Date(); 
+	hour = today.getHours(); 
+	minute = today.getMinutes();
+	if(hour > 12){
+		hour = hour - 12; 
+		m = "pm"; 
+	}
+	document.writeln("Today's date is " + today + ".<br />");
+	document.writeln("The time is " + hour + ":" + minute + " " + m + ".<br />");
+	document.writeln("Welcome to the site, " + name + "!"); 
+*/
+/*
+function gen(){	
+	document.writeln("<table>");
+	var z = 1;  
+	for(var i = 0; i < 5; i++){
+		document.writeln("<tr>"); 
+		for(var j = 0; j < 5; j++){
+			document.writeln("<td style = \" border: 2px solid; width: 30px; text-align: center;\">" + (Math.floor((Math.random()*9 ) + 1)) + "</td>");
+			z++; 
+		}
+		document.writeln("</tr>"); 
+	}
+	document.writeln("</table>"); 
+	return; 
+}
+*/
+/*
+function gen_button(){
+		document.writeln("<form><input type = \"button\" value = \"Generate\" onclick = \"generate()\" /></form>");
+}
+
+*/
+
+function rand_gen(){
+	return Math.floor((Math.random() * 9) + 1); 
+	}
+
+function gen(){
+	var aa = document.getElementById("aa");  
+	var ab = document.getElementById("ab"); 
+	var ac = document.getElementById("ac"); 
+	var ad = document.getElementById("ad"); 
+	var ae = document.getElementById("ae"); 
+	
+	var ba = document.getElementById("ba"); 
+	var bb = document.getElementById("bb");
+	var bc = document.getElementById("bc"); 
+	var bd = document.getElementById("bd"); 
+	var be = document.getElementById("be"); 
+	
+	var ca = document.getElementById("ca");
+	var cb = document.getElementById("cb"); 
+	var cc = document.getElementById("cc"); 
+	var cd = document.getElementById("cd"); 
+	var ce = document.getElementById("ce"); 
+	
+	var da = document.getElementById("da"); 
+	var db = document.getElementById("db"); 
+	var dc = document.getElementById("dc"); 
+	var dd = document.getElementById("dd");
+	var de = document.getElementById("de"); 
+	
+	var ea = document.getElementById("ea");
+	var eb = document.getElementById("eb"); 
+	var ec = document.getElementById("ec"); 
+	var ed = document.getElementById("ed"); 
+	var ee = document.getElementById("ee");
+	
+	aa.innerHTML = rand_gen(); 
+	ab.innerHTML = rand_gen();  
+	ac.innerHTML = rand_gen();  
+	ad.innerHTML = rand_gen();  
+	ae.innerHTML = rand_gen();  
+	
+	ba.innerHTML = rand_gen();  
+	bb.innerHTML = rand_gen();  
+	bc.innerHTML = rand_gen();  
+	bd.innerHTML = rand_gen();  
+	be.innerHTML = rand_gen();  
+	
+	ca.innerHTML = rand_gen();  
+	cb.innerHTML = rand_gen();  
+	cc.innerHTML = rand_gen();  
+	cd.innerHTML = rand_gen();  
+	ce.innerHTML = rand_gen();  
+	
+	da.innerHTML = rand_gen();  
+	db.innerHTML = rand_gen();  
+	dc.innerHTML = rand_gen();  
+	dd.innerHTML = rand_gen();  
+	de.innerHTML = rand_gen();  
+	
+	ea.innerHTML = rand_gen();  
+	eb.innerHTML = rand_gen(); 
+	ec.innerHTML = rand_gen();  
+	ed.innerHTML = rand_gen();  
+	ee.innerHTML = rand_gen();  
+}
+
+// -->
+
+
+</script>
+
+<style type = "text/css">
+	td{
+		border: 2px solid black; 
+		width: 20px; 
+		height: 2em;
+		text-align: center;
+	}
+</style>
+
+</head>
+<body>
+<!--
+<input type = "button" value = "Generate" onclick = "gen()" />
+-->
+
+<table>
+	<tr>
+    	<td id = "aa"></td>
+        <td id = "ab"></td>
+        <td id = "ac"></td>
+        <td id = "ad"></td>
+        <td id = "ae"></td>
+    </tr>
+   	<tr>
+    	<td id = "ba"></td>
+        <td id = "bb"></td>
+        <td id = "bc"></td>
+        <td id = "bd"></td>
+        <td id = "be"></td>
+    </tr>	
+    <tr>
+    	<td id = "ca"></td>
+        <td id = "cb"></td>
+        <td id = "cc"></td>
+        <td id = "cd"></td>
+        <td id = "ce"></td>
+    </tr>	
+    <tr>
+    	<td id = "da"></td>
+        <td id = "db"></td>
+        <td id = "dc"></td>
+        <td id = "dd"></td>
+        <td id = "de"></td>
+    </tr>
+    <tr>
+    	<td id = "ea"></td>
+        <td id = "eb"></td>
+        <td id = "ec"></td>
+        <td id = "ed"></td>
+        <td id = "ee"></td>
+    </tr>
+    <input type = "button" value = "Generate" onclick = "gen()" />
+</table>
+
+
+</body>
+</html>

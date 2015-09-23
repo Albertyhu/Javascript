@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Image Drag and Drop</title>
+
+<style type = "text/css">
+	.hills{
+		width: 200px;
+		height: 150px; 
+		position: absolute;
+	}
+	
+	.main{
+		width: 200px; 
+		height:200px;
+		border: solid 1px black;
+		position: absolute;
+		background-image: url("pic/hills.jpg"); 
+		background-cover: cover; 
+		overflow: hidden; 
+	}
+	
+	.display{
+		position: relative;
+		bottom: 100px;
+	}
+</style>
+
+<script type = "text/javascript">
+
+	//writing the onmousedown and onmouseup event works better than writing them inline in HTML code 
+	function initDragDrop(){
+		document.getElementById("main").onmousedown = clickBox; 
+		document.onmouseup = dropBox; 
+	}
+	
+	//non-working function 
+	function clickImg(event){
+		document.onmousemove = imgMove;
+	}
+	
+	//non-working function 
+	function imgMove(event){
+		var x = event.clientX; 
+		var y = event.clientY; 
+		var x_coor = x - 100; 
+		var y_coor = y - 75; 
+		var image = document.getElementById("hills"); 
+		image.style.top = y_coor + "px"; 
+		image.style.left = x_coor + "px"; 
+	}
+	
+	//non-working function 
+	function dropImg(event){
+		document.onmousemove = null; 
+	}
+	
+	//code for dragging the box when the button is still pushed down 
+	function clickBox(event){
+		var box = document.getElementById("main");  
+		document.onmousemove = moveBox;
+	}
+	
+	//code for releasing the box after the button has been released 
+	function dropBox(event){
+		document.onmousemove= null; 
+	}
+	
+	function moveBox(event){
+		var x = event.clientX; 
+		var y = event.clientY;
+		//since the box is 200px wide and 200px in height, you want the mouse to start half-way 
+		var x_coor = x - 100; 
+		var y_coor = y - 100; 
+		var box = document.getElementById("main"); 
+		box.style.top = y_coor + "px"; 
+		box.style.left = x_coor + "px"; 
+	}
+	
+</script>
+
+</head>
+
+<body onload = "initDragDrop()">
+
+<!--<img src = "pic/hills.jpg" alt = "" class = "hills" id = "hills" /> //It is better to set the background of a div as an image-->
+<div class = "main" id = "main"></div>
+<p id = "display" class = "display"></p>
+</body>
+</html>
